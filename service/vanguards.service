@@ -5,9 +5,11 @@ Wants=tor.service
 
 [Service]
 Type=simple
-ExecStart=vanguards --logfile /var/log/vanguards.log
+ExecStartPre=/bin/rm -f /var/lib/vanguards/vanguards.state
+ExecStart=vanguards --logfile /var/log/vanguards.log --state /var/lib/vanguards/vanguards.state
 Restart=on-failure
 RestartSec=5
+StateDirectory=vanguards
 
 [Install]
 WantedBy=multi-user.target
